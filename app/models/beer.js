@@ -3,11 +3,12 @@
 const mongoose = require('mongoose');
 
 const beerSchema = new mongoose.Schema({
-     beer: [
+     properties: [
        {
          id: Number,
          name: String,
-         type: String,
+         abv: Number,
+         ibu: Number,
       }
     ]
    },

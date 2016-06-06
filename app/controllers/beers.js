@@ -17,7 +17,8 @@ const index = (req, res, next) => {
 };
 
 const show = (req, res, next) => {
-  Beer.find({"id": req.params.id})
+  Beer.find({"id": req.params.id},
+            {name: 1, id: 1, abv: 1, ibu:1 })
   .then(beer => beer? res.json({beer}): next())
   .catch(err => next(err));
 };

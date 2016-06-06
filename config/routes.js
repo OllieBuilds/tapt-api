@@ -37,4 +37,8 @@ module.exports = require('lib/wiring/routes')
 // .resources('products')
 .get('/beers', 'beers#index')
 .get('/beers/:id', 'beers#show')
+
+.get('/favorites', 'favorites#index')
+.post('/favorites', 'favorites#create')
+
 ;
