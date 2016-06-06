@@ -2,52 +2,41 @@
 
 const controller= require('lib/wiring/controller');
 const models = require('app/models');
-const Favorite = models.favorite;
+const User = models.user;
 const authenticate = require('./concerns/authenticate');
 
-const create =(req, res, next) =>{
-  console.log(req.body);
-  let favorite = Object.assign(req, {
-    _owner: req.currentUser._id,
-    properties: req.body
-  });
-  Favorite.create(favorite)
-  .then(favorite => res.json({ favorite }))
+const addToBeer =(req, res, next) =>{
+  console.log("yooooo");
+  User.findById(req.currentUser._id)
+  .then((user) => {
+    user.update({$push: {"beer": req.body}});
+    user.beer.push(req.body);
+    return user.save();
+  })
+  .then(() => res.sendStatus(200))
   .catch(err => next(err));
 };
 
 const show = (req, res, next) => {
-  Favorite.find({"_owner": req.currentUser._id})
-  .then(favorite => favorite ? res.json({ favorite }) : next())
+  User.findById(req.currentUser._id)
+  .then(() => res.json({ beer: req.currentUser.beer }))
   .catch(err => next(err));
 };
 
-const index = (req, res, next) => {
-  Favorite.find()
-  .then((favorites) => res.json({ favorites }))
-  .catch((err) => next(err));
-};
-
-const update = (req, res, next) => {
-  let search = {_id: req.params.id, _owner: req.currentUser._id};
-  Favorite.findOne(search)
-  .then(favorite =>{
-    if(!favorite){
-      return next();
-    }
-
-    delete req.body._owner;
-    return favorite.update(req.body.favorite)
-    .then(() => res.sendStatus(200));
-  })
+const destroy = (req, res, next) => {
+  User.findById(req.currentUser._id)
+  .thgen((user) =>
+  user.update( {'$pull': {'beer': {'id': req.body.id}}}))
+  .then(() => res.sendStatus(200))
   .catch(err => next(err));
 };
 
 module.exports = controller({
-  create,
-  index,
-  update,
+  addToBeer,
+  // index,
+  // update,
   show,
+  destroy,
 }, {before: [
-  {method: authenticate, except: ['index']},
+  {method: authenticate, except: []},
 ], });

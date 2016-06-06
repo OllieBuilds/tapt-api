@@ -38,8 +38,9 @@ module.exports = require('lib/wiring/routes')
 .get('/beers', 'beers#index')
 .get('/beers/:id', 'beers#show')
 
-.get('/favorites', 'favorites#index')
-.post('/favorites', 'favorites#create')
-.patch('/favorites', 'favorites#update')
+// .get('/favorites', 'favorites#index')
+.post('/favorites', 'favorites#addToBeer')
+// .patch('/favorites', 'favorites#update')
 .get('/favorite', 'favorites#show')
+.delete('/favorites', 'favorites#destroy')
 ;
