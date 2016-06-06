@@ -16,15 +16,38 @@ const create =(req, res, next) =>{
   .catch(err => next(err));
 };
 
+const show = (req, res, next) => {
+  Favorite.find({"_owner": req.currentUser._id})
+  .then(favorite => favorite ? res.json({ favorite }) : next())
+  .catch(err => next(err));
+};
+
 const index = (req, res, next) => {
   Favorite.find()
   .then((favorites) => res.json({ favorites }))
   .catch((err) => next(err));
 };
 
+const update = (req, res, next) => {
+  let search = {_id: req.params.id, _owner: req.currentUser._id};
+  Favorite.findOne(search)
+  .then(favorite =>{
+    if(!favorite){
+      return next();
+    }
+
+    delete req.body._owner;
+    return favorite.update(req.body.favorite)
+    .then(() => res.sendStatus(200));
+  })
+  .catch(err => next(err));
+};
+
 module.exports = controller({
   create,
   index,
+  update,
+  show,
 }, {before: [
   {method: authenticate, except: ['index']},
 ], });

@@ -40,5 +40,6 @@ module.exports = require('lib/wiring/routes')
 
 .get('/favorites', 'favorites#index')
 .post('/favorites', 'favorites#create')
-
+.patch('/favorites', 'favorites#update')
+.get('/favorite', 'favorites#show')
 ;
