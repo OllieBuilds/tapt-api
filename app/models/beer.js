@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const beerSchema = new mongoose.Schema({
-     beers: [
+     beer: [
        {
          id: Number,
          name: String,

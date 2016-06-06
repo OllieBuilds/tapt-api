@@ -12,10 +12,18 @@ const Beer = models.beer;
 const index = (req, res, next) => {
     Beer.find()
     .then((beers) => res.json({ beers }))
+    .then((beers) => console.log(beers[0]))
     .catch((err) => next(err));
+};
+
+const show = (req, res, next) => {
+  Beer.find({"id": req.params.id})
+  .then(beer => beer? res.json({beer}): next())
+  .catch(err => next(err));
 };
 
 
 module.exports = controller({
   index,
+  show
 });

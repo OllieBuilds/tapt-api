@@ -36,4 +36,5 @@ module.exports = require('lib/wiring/routes')
 // .post('/charge', 'orders#createCharge')
 // .resources('products')
 .get('/beers', 'beers#index')
+.get('/beers/:id', 'beers#show')
 ;
