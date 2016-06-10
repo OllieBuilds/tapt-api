@@ -6,7 +6,7 @@ Deployed App:
 <http://gnarsquad.github.io/nozama-front-end>
 
 Heroku:
-<https://nozama-api.herokuapp.com>
+<https://tapt-api.herokuapp.com>
 
 Front End Repository:
 <https://github.com/gnarsquad/nozama-front-end>

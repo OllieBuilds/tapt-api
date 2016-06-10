@@ -14,14 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  cart: [
-    {
-      quantity: Number,
-      productid: String,
+  beer: [{
       name: String,
-      price: Number,
-      image: String,
-    }
+      rating: String,
+    },
   ],
   passwordDigest: String,
   }, {

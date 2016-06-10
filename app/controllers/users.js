@@ -31,6 +31,7 @@ const userFilter = { passwordDigest: 0, token: 0 };
 
 const index = (req, res, next) => {
   User.find({}, userFilter)
+    .then(() => console.log(res.body))
     .then(users => res.json({ users }))
     .catch(err => next(err));
 };
@@ -40,6 +41,8 @@ const show = (req, res, next) => {
     .then(user => user ? res.json({ user }) : next())
     .catch(err => next(err));
 };
+
+
 
 const makeErrorHandler = (res, next) =>
   error =>

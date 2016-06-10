@@ -3,7 +3,7 @@
 const controller = require('lib/wiring/controller');
 const models = require('app/models');
 const Order = models.order;
-const stripe = require('stripe')('sk_test_uDTLkYo56xbc6pDAl6Y3oPZT');
+// const stripe = require('stripe')('sk_test_uDTLkYo56xbc6pDAl6Y3oPZT');
 const authenticate = require('./concerns/authenticate');
 
 const index = (req, res, next) => {
@@ -58,14 +58,14 @@ const destroy = (req, res, next) => {
   });
 };
 
-const createCharge = (req, res, next) => {
-  stripe.charges.create({
-    amount: req.body.amount,
-    currency: "usd",
-    source: req.body.stripeToken,
-  }).then(charge => res.json({ charge }))
-  .catch(err => next(err));
-};
+// const createCharge = (req, res, next) => {
+//   stripe.charges.create({
+//     amount: req.body.amount,
+//     currency: "usd",
+//     source: req.body.stripeToken,
+//   }).then(charge => res.json({ charge }))
+//   .catch(err => next(err));
+// };
 
 module.exports = controller({
   index,
@@ -73,7 +73,7 @@ module.exports = controller({
   show,
   update,
   destroy,
-  createCharge
+  // createCharge
 }, {before: [
   {method: authenticate, except: ['index'] },
 ], });

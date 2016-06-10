@@ -33,6 +33,19 @@ module.exports = require('lib/wiring/routes')
 .delete('/orders/:id', 'orders#destroy')
 
 // checkout
-.post('/charge', 'orders#createCharge')
-.resources('products')
+// .post('/charge', 'orders#createCharge')
+// .resources('products')
+.patch('/beers/:id', 'beers#update')
+.post('/beers', 'beers#create')
+.get('/beers', 'beers#index')
+.get('/beers/:id', 'beers#show')
+.delete('/beers/:id', 'beers#destroy')
+
+// .get('/favorites', 'favorites#index')
+.post('/tasted', 'favorites#addToFav')
+.patch('/tasted/:id', 'favorites#update')
+.get('/tasted', 'favorites#show')
+.delete('/tasted/:id', 'favorites#destroy')
+
+// .get('/breweries', 'breweries#get')
 ;
