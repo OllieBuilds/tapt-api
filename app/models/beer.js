@@ -3,14 +3,13 @@
 const mongoose = require('mongoose');
 
 const beerSchema = new mongoose.Schema({
-     properties: [
-       {
-         id: Number,
+
+
+         id: String,
          name: String,
          abv: Number,
          ibu: Number,
-      }
-    ]
+
    },
      {timestamps: true
  });

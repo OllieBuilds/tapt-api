@@ -8,12 +8,6 @@ const favoriteSchema = new mongoose.Schema({
        ref: 'User',
        required: false
      },
-     beer:[{
-         id: Number,
-         name: String,
-         abv: Number,
-         ibu: Number,
-      },]
    },
      {timestamps: true
  });

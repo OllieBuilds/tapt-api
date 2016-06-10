@@ -14,13 +14,10 @@ const userSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
-  beer: [
-    {
-      id: Number,
+  beer: [{
       name: String,
-      abv: Number,
-      ibu: Number,
-    }
+      rating: String,
+    },
   ],
   passwordDigest: String,
   }, {
